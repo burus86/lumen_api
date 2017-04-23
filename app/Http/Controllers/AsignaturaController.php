@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Asignatura;
+use App\Profesor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -11,12 +12,17 @@ class AsignaturaController extends Controller
 
     public function index(){
         $Asignaturas  = Asignatura::all();
-
+        foreach ($Asignaturas as $Asignatura) {
+            $Asignatura->profesor = Profesor::find($Asignatura->id_profesor);
+            $Asignatura->nombre_profesor = $Asignatura->profesor->nombre." ".$Asignatura->profesor->apellidos;
+        }
         return response()->json($Asignaturas);
     }
   
     public function getAsignatura($id){
         $Asignatura  = Asignatura::find($id);
+        $Asignatura->profesor = Profesor::find($Asignatura->id_profesor);
+        $Asignatura->nombre_profesor = $Asignatura->profesor->nombre." ".$Asignatura->profesor->apellidos;
 
         return response()->json($Asignatura);
     }

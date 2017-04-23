@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Alumno;
+use App\Nota;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,25 @@ class AlumnoController extends Controller
         $Alumno  = Alumno::find($id);
 
         return response()->json($Alumno);
+    }
+  
+    public function getAlumnoNotas($id){
+        $alumno  = Alumno::find($id);
+        $notas  = Nota::where('id_alumno', $alumno->id)
+            ->orderBy('trimestre', 'desc')
+            ->get();
+
+        return response()->json($notas);
+    }
+  
+    public function getAlumnoNotasTrimestre($id, $trimestre){
+        $alumno  = Alumno::find($id);
+        $notas  = Nota::where('id_alumno', $alumno->id)
+            ->where('trimestre', $trimestre)
+            ->orderBy('trimestre', 'desc')
+            ->get();
+
+        return response()->json($notas);
     }
   
     public function createAlumno(Request $request){

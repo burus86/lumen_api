@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Nota;
+use App\Alumno;
+use App\Asignatura;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -17,6 +19,10 @@ class NotaController extends Controller
   
     public function getNota($id){
         $Nota  = Nota::find($id);
+        $Nota->alumno = Alumno::find($Nota->id_alumno);
+        $Nota->asignatura = Asignatura::find($Nota->id_asignatura);
+        $Nota->nombre_alumno = $Nota->alumno->nombre." ".$Nota->alumno->apellidos;
+        $Nota->nombre_asignatura = $Nota->asignatura->nombre." (".$Nota->asignatura->curso.")";
 
         return response()->json($Nota);
     }
