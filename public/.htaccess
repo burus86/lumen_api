@@ -18,6 +18,13 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # HOTFIX: Añadir esta línea para permitir hacer peticiones a este servicio web con Lumen desde el cliente realizado en AngularJS
-    Header set Access-Control-Allow-Origin "*"
+    # Header add Access-Control-Allow-Origin "*"
+</IfModule>
+
+# HOTFIX: Añadir estas líneas para permitir hacer todo tipo de peticiones al servicio web desde el cliente realizado en AngularJS
+<IfModule mod_headers.c>
+    Header add Access-Control-Allow-Origin "*"
+    Header add Access-Control-Allow-Methods "POST, GET, PUT, OPTIONS, PATCH, DELETE" 
+    Header add Access-Control-Allow-Headers "X-Accept-Charset,X-Accept,Content-Type"
+    ServerSignature Off
 </IfModule>
