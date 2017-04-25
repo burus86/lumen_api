@@ -20,9 +20,9 @@ $app->group(['prefix' => 'api/v1'], function($app)
 	/* ALUMNOS */
 	$app->get('alumnos','AlumnoController@index');
 	$app->get('alumnos/{id}','AlumnoController@getAlumno');
-	$app->post('alumnos','AlumnoController@createAlumno'); // TODO: Verificar si funciona
-	$app->put('alumnos/{id}','AlumnoController@updateAlumno'); // TODO: Verificar si funciona // $app->get('alumnos/{id}/update','AlumnoController@updateAlumno');
-	$app->get('alumnos/{id}/delete','AlumnoController@deleteAlumno');
+	$app->post('alumnos','AlumnoController@createAlumno');
+	$app->put('alumnos/{id}','AlumnoController@updateAlumno');
+	$app->delete('alumnos/{id}','AlumnoController@deleteAlumno');
 	$app->get('alumnos/{id}/notas','AlumnoController@getAlumnoNotas');
 	$app->get('alumnos/{id}/notas/trimestre/{trimestre}','AlumnoController@getAlumnoNotasTrimestre');
 
