@@ -29,9 +29,12 @@ class UsuarioController extends Controller
   
     public function updateUsuario(Request $request,$id){
         $Usuario  = Usuario::find($id);
+        $Usuario->usuario = $request->input('usuario');
         $Usuario->email = $request->input('email');
-        $Usuario->password = $request->input('password'); // FIXME
+        $Usuario->password = $request->input('password'); // FIXME: Encriptar contraseña
+        $Usuario->rol = $request->input('rol');
         $Usuario->activo = $request->input('activo');
+        $Usuario->ultima_conexion = $request->input('ultima_conexion');
         $Usuario->save();
   
         return response()->json($Usuario);
