@@ -10,42 +10,56 @@ class UsuarioController extends Controller
 {
 
     public function index(){
-        $Usuarios  = Usuario::all();
+        $usuarios  = Usuario::all();
 
-        return response()->json($Usuarios);
+        return response()->json($usuarios);
     }
   
     public function getUsuario($id){
-        $Usuario  = Usuario::find($id);
+        $usuario  = Usuario::find($id);
 
-        return response()->json($Usuario);
+        return response()->json($usuario);
     }
   
     public function createUsuario(Request $request){
-        $Usuario = Usuario::create($request->all());
+        $usuario = Usuario::create($request->all());
 
-        return response()->json($Usuario);
+        return response()->json($usuario);
     }
   
     public function updateUsuario(Request $request,$id){
-        $Usuario  = Usuario::find($id);
-        $Usuario->usuario = $request->input('usuario');
-        $Usuario->email = $request->input('email');
-        $Usuario->password = $request->input('password'); // FIXME: Encriptar contraseña
-        $Usuario->rol = $request->input('rol');
-        $Usuario->activo = $request->input('activo');
-        $Usuario->ultima_conexion = $request->input('ultima_conexion');
-        $Usuario->save();
+        $usuario  = Usuario::find($id);
+        $usuario->usuario = $request->input('usuario');
+        $usuario->email = $request->input('email');
+        $usuario->password = $request->input('password'); // FIXME: Encriptar contraseña
+        $usuario->rol = $request->input('rol');
+        $usuario->activo = $request->input('activo');
+        $usuario->ultima_conexion = $request->input('ultima_conexion');
+        $usuario->save();
   
-        return response()->json($Usuario);
+        return response()->json($usuario);
     }
 	
     public function deleteUsuario($id){
-        $Usuario  = Usuario::find($id);
-        $Usuario->delete();
+        $usuario  = Usuario::find($id);
+        $usuario->delete();
 
         return response()->json('deleted');
     }
   
-    //
+    public function loginUsuario($email, $password){
+        $usuario  = Usuario::where('email', $email)
+            ->where('password', $password)
+            ->first();
+
+        return response()->json($usuario);
+    }
+  
+    public function recuperarUsuarioPassword($email){
+		//if (Usuario::where('email', $email)->count() > 0)
+		$usuario  = Usuario::where('email', $email)->first();
+
+        return response()->json($usuario);
+    }
+  
 }
