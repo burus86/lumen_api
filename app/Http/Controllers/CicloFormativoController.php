@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CicloFormativo;
 use App\Asignatura;
+use App\Profesor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,12 @@ class CicloFormativoController extends Controller
         $Asignaturas  = Asignatura::where('id_ciclo_formativo', $CicloFormativo->id)
             ->orderBy('nombre', 'desc')
             ->get();
+        foreach ($Asignaturas as $Asignatura) {
+            $Asignatura->profesor = Profesor::find($Asignatura->id_profesor);
+            $Asignatura->nombre_profesor = $Asignatura->profesor->nombre." ".$Asignatura->profesor->apellidos;
+			/*$Asignatura->cicloformativo = CicloFormativo::find($Asignatura->id_ciclo_formativo);
+            $Asignatura->nombre_cicloformativo = $Asignatura->cicloformativo->referencia;*/
+        }
 
         return response()->json($Asignaturas);
     }
