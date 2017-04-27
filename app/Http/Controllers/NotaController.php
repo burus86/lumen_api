@@ -13,6 +13,12 @@ class NotaController extends Controller
 
     public function index(){
         $Notas  = Nota::all();
+        foreach ($Notas as $Nota) {
+            $Nota->alumno = Alumno::find($Nota->id_alumno);
+			$Nota->asignatura = Asignatura::find($Nota->id_asignatura);
+            $Nota->nombre_alumno = $Nota->alumno->nombre." ".$Nota->alumno->apellidos;
+            $Nota->nombre_asignatura = $Nota->asignatura->codigo.": ".$Nota->asignatura->nombre;
+        }
 
         return response()->json($Notas);
     }
@@ -22,7 +28,7 @@ class NotaController extends Controller
         $Nota->alumno = Alumno::find($Nota->id_alumno);
         $Nota->asignatura = Asignatura::find($Nota->id_asignatura);
         $Nota->nombre_alumno = $Nota->alumno->nombre." ".$Nota->alumno->apellidos;
-        $Nota->nombre_asignatura = $Nota->asignatura->nombre." (".$Nota->asignatura->curso.")";
+        $Nota->nombre_asignatura = $Nota->asignatura->codigo.": ".$Nota->asignatura->nombre;
 
         return response()->json($Nota);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Alumno;
+use App\Asignatura;
 use App\Nota;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -27,16 +28,28 @@ class AlumnoController extends Controller
         $notas  = Nota::where('id_alumno', $alumno->id)
             ->orderBy('trimestre', 'desc')
             ->get();
+        foreach ($notas as $nota) {
+            $nota->alumno = Alumno::find($nota->id_alumno);
+			$nota->asignatura = Asignatura::find($nota->id_asignatura);
+            $nota->nombre_alumno = $nota->alumno->nombre." ".$nota->alumno->apellidos;
+            $nota->nombre_asignatura = $nota->asignatura->codigo.": ".$nota->asignatura->nombre;
+        }
 
         return response()->json($notas);
     }
   
-    public function getAlumnoNotasTrimestre($id, $trimestre){
+    public function getAlumnoNotasTrimestre($id, $trimestre){ // Nunca se utiliza este método
         $alumno  = Alumno::find($id);
         $notas  = Nota::where('id_alumno', $alumno->id)
             ->where('trimestre', $trimestre)
             ->orderBy('trimestre', 'desc')
             ->get();
+        foreach ($notas as $nota) {
+            $nota->alumno = Alumno::find($nota->id_alumno);
+			$nota->asignatura = Asignatura::find($nota->id_asignatura);
+            $nota->nombre_alumno = $nota->alumno->nombre." ".$nota->alumno->apellidos;
+            $nota->nombre_asignatura = $nota->asignatura->codigo.": ".$nota->asignatura->nombre;
+        }
 
         return response()->json($notas);
     }
