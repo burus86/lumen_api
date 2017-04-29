@@ -26,7 +26,6 @@ class AlumnoController extends Controller
     public function getAlumnoNotas($id){
         $alumno  = Alumno::find($id);
         $notas  = Nota::where('id_alumno', $alumno->id)
-            ->orderBy('trimestre', 'desc')
             ->get();
         foreach ($notas as $nota) {
             $nota->alumno = Alumno::find($nota->id_alumno);
@@ -42,7 +41,6 @@ class AlumnoController extends Controller
         $alumno  = Alumno::find($id);
         $notas  = Nota::where('id_alumno', $alumno->id)
             ->where('trimestre', $trimestre)
-            ->orderBy('trimestre', 'desc')
             ->get();
         foreach ($notas as $nota) {
             $nota->alumno = Alumno::find($nota->id_alumno);

@@ -26,7 +26,6 @@ class CicloFormativoController extends Controller
     public function getCicloFormativoAsignaturas($id){
         $CicloFormativo  = CicloFormativo::find($id);
         $Asignaturas  = Asignatura::where('id_ciclo_formativo', $CicloFormativo->id)
-            ->orderBy('nombre', 'desc')
             ->get();
         foreach ($Asignaturas as $Asignatura) {
             $Asignatura->profesor = Profesor::find($Asignatura->id_profesor);
