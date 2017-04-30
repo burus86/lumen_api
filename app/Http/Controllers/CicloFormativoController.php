@@ -30,8 +30,8 @@ class CicloFormativoController extends Controller
         foreach ($Asignaturas as $Asignatura) {
             $Asignatura->profesor = Profesor::find($Asignatura->id_profesor);
             $Asignatura->nombre_profesor = $Asignatura->profesor->nombre." ".$Asignatura->profesor->apellidos;
-			/*$Asignatura->cicloformativo = CicloFormativo::find($Asignatura->id_ciclo_formativo);
-            $Asignatura->nombre_cicloformativo = $Asignatura->cicloformativo->referencia;*/
+			$Asignatura->cicloformativo = CicloFormativo::find($Asignatura->id_ciclo_formativo);
+            $Asignatura->nombre_cicloformativo = $Asignatura->cicloformativo->referencia;
         }
 
         return response()->json($Asignaturas);
