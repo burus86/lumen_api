@@ -11,7 +11,7 @@ class Usuario extends Model
      *
      * @var array
      */
-    protected $fillable = ['usuario', 'email', 'password', 'rol', 'activo', 'ultima_conexion'];
+    protected $fillable = ['id', 'usuario', 'email', 'password', 'rol', 'activo', 'ultima_conexion'];
 
     /**
      * The attributes excluded from the model's JSON form.

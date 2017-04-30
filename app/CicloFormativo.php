@@ -11,7 +11,7 @@ class CicloFormativo extends Model
      *
      * @var array
      */
-    protected $fillable = ['referencia', 'nombre', 'nivel', 'duracion', 'familia_profesional'];
+    protected $fillable = ['id', 'referencia', 'nombre', 'nivel', 'duracion', 'familia_profesional'];
 
     /**
      * The table associated with the model.

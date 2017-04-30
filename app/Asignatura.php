@@ -11,6 +11,6 @@ class Asignatura extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_ciclo_formativo', 'id_profesor', 'codigo', 'nombre', 'curso', 'horas_semana', 'horas_totales', 'creditos'];
+    protected $fillable = ['id', 'id_ciclo_formativo', 'id_profesor', 'codigo', 'nombre', 'curso', 'horas_semana', 'horas_totales', 'creditos'];
 
 }

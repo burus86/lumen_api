@@ -11,7 +11,7 @@ class Profesor extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre', 'apellidos', 'dni', 'edad', 'email', 'telefono', 'observaciones'];
+    protected $fillable = ['id', 'nombre', 'apellidos', 'dni', 'edad', 'email', 'telefono', 'observaciones'];
 
     /**
      * The table associated with the model.

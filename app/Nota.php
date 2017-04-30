@@ -11,6 +11,6 @@ class Nota extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_alumno', 'id_asignatura', 'nota', 'trimestre', 'observaciones'];
+    protected $fillable = ['id', 'id_alumno', 'id_asignatura', 'nota', 'trimestre', 'observaciones'];
 
 }

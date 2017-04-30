@@ -36,7 +36,6 @@ $app->group(['prefix' => 'api/v1'], function($app)
 	$app->get('profesores/{id}/delete','ProfesorController@deleteProfesor');
 
     /* CICLOS FORMATIVOS */
-    // TODO: Verificar si funcionan todos los métodos
     $app->get('ciclosformativos','CicloFormativoController@index');
     $app->get('ciclosformativos/{id}','CicloFormativoController@getCicloFormativo');
     $app->post('ciclosformativos','CicloFormativoController@createCicloFormativo');
