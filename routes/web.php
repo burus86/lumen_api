@@ -51,6 +51,7 @@ $app->group(['prefix' => 'api/v1'], function($app)
 	$app->put('asignaturas/{id}','AsignaturaController@updateAsignatura');
 	$app->delete('asignaturas/{id}','AsignaturaController@deleteAsignatura');
 	$app->get('asignaturas/{id}/delete','AsignaturaController@deleteAsignatura');
+	$app->get('asignaturas/{id}/notas','AsignaturaController@getAsignaturaNotas');
 
 	/* NOTAS */
 	$app->get('notas','NotaController@index');

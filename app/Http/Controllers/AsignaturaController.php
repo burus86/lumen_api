@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Asignatura;
 use App\CicloFormativo;
 use App\Profesor;
+use App\Nota;
+use App\Alumno;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -32,6 +34,20 @@ class AsignaturaController extends Controller
         return response()->json($Asignatura);
     }
   
+    public function getAsignaturaNotas($id){
+        $asignatura  = Asignatura::find($id);
+        $notas  = Nota::where('id_asignatura', $asignatura->id)
+            ->get();
+        foreach ($notas as $nota) {
+            $nota->asignatura = Asignatura::find($nota->id_asignatura);
+            $nota->alumno = Alumno::find($nota->id_alumno);
+            $nota->nombre_asignatura = $nota->asignatura->codigo.": ".$nota->asignatura->nombre;
+            $nota->nombre_alumno = $nota->alumno->nombre." ".$nota->alumno->apellidos;
+        }
+
+        return response()->json($notas);
+    }
+
     public function createAsignatura(Request $request){
         $Asignatura = Asignatura::create($request->all());
 
